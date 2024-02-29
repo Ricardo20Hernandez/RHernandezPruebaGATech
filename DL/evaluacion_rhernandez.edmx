@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="evaluacion_rhernandezModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Resumen">
+          <Key>
+            <PropertyRef Name="Id_Resumen" />
+          </Key>
+          <Property Name="Id_Resumen" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_Tienda" Type="varchar" MaxLength="10" />
+          <Property Name="Id_Registradora" Type="varchar" MaxLength="5" />
+          <Property Name="Tickets" Type="int" />
+        </EntityType>
+        <EntityType Name="Tickets">
+          <Key>
+            <PropertyRef Name="Id_Tickets" />
+          </Key>
+          <Property Name="Id_Tickets" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_Tienda" Type="varchar" MaxLength="10" />
+          <Property Name="Id_Registradora" Type="varchar" MaxLength="5" />
+          <Property Name="FechaHora" Type="datetime" />
+          <Property Name="Ticket" Type="int" />
+          <Property Name="Impuesto" Type="money" />
+          <Property Name="Total" Type="money" />
+          <Property Name="FechaHora_Creacion" Type="datetime" />
+        </EntityType>
+        <Function Name="AddTickets" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id_Tienda" Type="varchar" Mode="In" />
+          <Parameter Name="Id_Registradora" Type="varchar" Mode="In" />
+          <Parameter Name="FechaHora" Type="datetime" Mode="In" />
+          <Parameter Name="Ticket" Type="int" Mode="In" />
+          <Parameter Name="Impuesto" Type="money" Mode="In" />
+          <Parameter Name="Total" Type="money" Mode="In" />
+          <Parameter Name="FechaHora_Creacion" Type="datetime" Mode="In" />
+        </Function>
+        <EntityContainer Name="evaluacion_rhernandezModelStoreContainer">
+          <EntitySet Name="Resumen" EntityType="Self.Resumen" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tickets" EntityType="Self.Tickets" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="evaluacion_rhernandezModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Resuman">
+          <Key>
+            <PropertyRef Name="Id_Resumen" />
+          </Key>
+          <Property Name="Id_Resumen" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_Tienda" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Id_Registradora" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="Tickets" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Ticket">
+          <Key>
+            <PropertyRef Name="Id_Tickets" />
+          </Key>
+          <Property Name="Id_Tickets" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_Tienda" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Id_Registradora" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="FechaHora" Type="DateTime" Precision="3" />
+          <Property Name="Ticket1" Type="Int32" />
+          <Property Name="Impuesto" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Total" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="FechaHora_Creacion" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityContainer Name="evaluacion_rhernandezEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Resumen" EntityType="Self.Resuman" />
+          <EntitySet Name="Tickets" EntityType="Self.Ticket" />
+          <FunctionImport Name="AddTickets">
+            <Parameter Name="Id_Tienda" Mode="In" Type="String" />
+            <Parameter Name="Id_Registradora" Mode="In" Type="String" />
+            <Parameter Name="FechaHora" Mode="In" Type="DateTime" />
+            <Parameter Name="Ticket" Mode="In" Type="Int32" />
+            <Parameter Name="Impuesto" Mode="In" Type="Decimal" />
+            <Parameter Name="Total" Mode="In" Type="Decimal" />
+            <Parameter Name="FechaHora_Creacion" Mode="In" Type="DateTime" />
+          </FunctionImport>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="evaluacion_rhernandezModelStoreContainer" CdmEntityContainer="evaluacion_rhernandezEntities">
+          <EntitySetMapping Name="Resumen">
+            <EntityTypeMapping TypeName="evaluacion_rhernandezModel.Resuman">
+              <MappingFragment StoreEntitySet="Resumen">
+                <ScalarProperty Name="Id_Resumen" ColumnName="Id_Resumen" />
+                <ScalarProperty Name="Id_Tienda" ColumnName="Id_Tienda" />
+                <ScalarProperty Name="Id_Registradora" ColumnName="Id_Registradora" />
+                <ScalarProperty Name="Tickets" ColumnName="Tickets" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tickets">
+            <EntityTypeMapping TypeName="evaluacion_rhernandezModel.Ticket">
+              <MappingFragment StoreEntitySet="Tickets">
+                <ScalarProperty Name="Id_Tickets" ColumnName="Id_Tickets" />
+                <ScalarProperty Name="Id_Tienda" ColumnName="Id_Tienda" />
+                <ScalarProperty Name="Id_Registradora" ColumnName="Id_Registradora" />
+                <ScalarProperty Name="FechaHora" ColumnName="FechaHora" />
+                <ScalarProperty Name="Ticket1" ColumnName="Ticket" />
+                <ScalarProperty Name="Impuesto" ColumnName="Impuesto" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="FechaHora_Creacion" ColumnName="FechaHora_Creacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="AddTickets" FunctionName="evaluacion_rhernandezModel.Store.AddTickets" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
